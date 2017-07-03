@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="main.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        {{#sessionExist}}
+          <span class="welcome">Welcome {{sessionExist}}</span>
+        {{/sessionExist}}
+        <span>
+          <nav>
+            {{^sessionExist}}
+              <a href="/login">Login</a>
+              <a href="/signup">Sign Up</a>
+            {{/sessionExist}}
+            {{#sessionExist}}
+              <a href="/newgab">New Gab</a>
+              <a href="/home/logout">Log out</a>
+            {{/sessionExist}}
+          </nav>
+        </span>
+        <span class="title">Gabble</span>
+      </div>
+    {{#sessionExist}}
+      <div class="fields">
+        <ul>
+          {{#userMsg}}
+          <li>{{#gabs}}<b>{{username}}</b>{{/gabs}} : <div class="display_msg">{{messages}}</div></li>
+          <li>{{createdAt}}</li>
+          <form method="post" action="/home">
+            <input type="hidden" name="id_delete" value="{{id}}">
+            <input type="hidden" name="action" value="delete">
+            <li><button type="submit" name= "btn_Del">Delete</button></li>
+          </form>
+          {{/userMsg}}
+
+          {{^userMsg}}
+            <li>Yet to add messages by user</li>
+          {{/userMsg}}
+        </ul>
+      </div>
+      <hr>
+
+      <div class="fields">
+        <ul>
+        {{#allMsg}}
+          <li>{{#gabs}}<b>{{username}}</b>{{/gabs}} : <div class="display_msg">{{messages}}</div></li>
+          <li>{{createdAt}}</li>
+          <form method="post" action="/home">
+            <input type="hidden" name="id_update" value="{{id}}">
+            <input type="hidden" name="action" value="update">
+            <li><button type="submit" name= "btn_Like">Like</button></li>
+          </form>
+          {{/allMsg}}
+        </ul>
+      </div>
+    {{/sessionExist}}
+    </div>
+
+  </body>
+</html>
