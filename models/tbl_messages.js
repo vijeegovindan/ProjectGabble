@@ -7,12 +7,7 @@ module.exports = function(sequelize, DataTypes) {
 
   tbl_messages.associate = function(models) {
     tbl_messages.belongsTo(models.tbl_user, {as: 'gabs', foreignKey: 'user_id'});
+    tbl_messages.hasMany(models.tbl_likes, {as: "gabsliked", foreignKey: 'messsage_id'});
   }
-
-  // tbl_messages.associate = function(models){
-  //     tbl_messages.belongsToMany(models.tbl_user,
-  //                               {as:'like_messages', through: 'tbl_likes', foreignKey: 'messsage_id', otherKey: 'user_id'});
-  // }
-  //
    return tbl_messages;
 };

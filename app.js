@@ -10,7 +10,7 @@ const loginRoutes = require("./routes/login");
 const gabRoutes = require("./routes/gab");
 const listRoutes = require("./routes/home");
 const likesRoutes = require("./routes/likes");
-
+const logoutRoutes = require("./routes/logout");
 const session = require('express-session');
 const app = express();
 
@@ -19,11 +19,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'mustache')
 app.use('/static', express.static('static'));
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressValidator());
 app.use(morgan('dev'))
-
 app.use(session({
   secret: 'ssssgabhhh!! sssgabhhhh!!',
   resave: false,
@@ -35,7 +33,8 @@ app.use(loginRoutes);
 app.use(gabRoutes);
 app.use(listRoutes);
 app.use(likesRoutes);
+app.use(logoutRoutes);
 
-app.listen(8000, function () {
-    console.log('Express running on 8000')
+app.listen(8080, function () {
+    console.log('Express running on 8080')
 });

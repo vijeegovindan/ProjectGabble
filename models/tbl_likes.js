@@ -6,11 +6,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {});
 
   tbl_likes.associate = function(models) {
-    tbl_likes.belongsTo(models.tbl_user, {as: 'like_users', foreignKey: 'user_id'});
-  }
-
-  tbl_likes.associate = function(models) {
-    tbl_likes.belongsTo(models.tbl_messages, {as: 'like_messages', foreignKey: 'messsage_id'});
+    tbl_likes.belongsTo(models.tbl_user, { as: "likeusers", foreignKey: 'user_id'});
+    tbl_likes.belongsTo(models.tbl_messages, {as: "likegabs", foreignKey: 'messsage_id'});
   }
 
   return tbl_likes;

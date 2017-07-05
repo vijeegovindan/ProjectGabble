@@ -1,10 +1,12 @@
 const routes = require('express').Router();
 const models = require('../models');
+const sequelize = require("sequelize");
 
 routes.get("/signup", function(req, res){
   res.render("signup", {sessionExist:req.session.username});
 });
-
+//Get the display name, username, password from the user
+//New user registration with validations
 routes.post("/signup", function(req, res){
 
   let errors = "";
@@ -21,7 +23,8 @@ routes.post("/signup", function(req, res){
     errors.forEach(function(error){
     messages.push(error.msg);
   });
-  res.render("signup", {messages: messages, sessionExist:req.session.username});
+  res.render("signup", {messages: messages,
+                        sessionExist:req.session.username});
   }
   else {
     models.tbl_user.findOrCreate({
@@ -32,6 +35,10 @@ routes.post("/signup", function(req, res){
         name: req.body.yourname,
         password:req.body.password
       }
+    }).catch(sequelize.ValidationError, function(err) {
+      console.log("Not Valid! ", err);
+    }).catch(sequelize.UniqueConstraintError, function(err) {
+      console.log("Not Unique! ", err);
     }).spread(function(user, created){
       if(!created) {
         res.render("signup", {messages: "Username already exists", sessionExist:req.session.username});
@@ -42,5 +49,4 @@ routes.post("/signup", function(req, res){
     });
   }
   });
-
 module.exports = routes;

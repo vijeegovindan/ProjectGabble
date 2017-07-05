@@ -10,7 +10,7 @@
     <div class="wrapper">
       <div class="header">
         {{#sessionExist}}
-          <span class="welcome">Welcome {{sessionExist}}</span>
+          <span class="welcome">Welcome {{userFullName}}</span>
         {{/sessionExist}}
         <span>
           <nav>
@@ -20,7 +20,7 @@
             {{/sessionExist}}
             {{#sessionExist}}
               <a href="/home">Gabble</a>
-              <a href="/home/logout">Log out</a>
+              <a href="/logout">Log out</a>
             {{/sessionExist}}
           </nav>
         </span>

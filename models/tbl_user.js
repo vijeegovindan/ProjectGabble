@@ -7,14 +7,9 @@ module.exports = function(sequelize, DataTypes) {
   }, {});
 
   tbl_user.associate = function(models) {
-       tbl_user.hasMany(models.tbl_messages, {as: 'users', foreignKey: 'user_id'})
+       tbl_user.hasMany(models.tbl_messages, {as: 'users', foreignKey: 'user_id'});
+       tbl_user.hasMany(models.tbl_likes, {as: 'usersliked', foreignKey: 'user_id'});
   }
-
-  // tbl_user.associate = function(models) {
-  //    tbl_user.belongsToMany(models.tbl_messages, {
-  //      as: 'like_users', through: models.tbl_likes, foreignKey: 'user_id', otherKey: 'messsage_id'
-  //    });
-  // }
 
   return tbl_user;
 };

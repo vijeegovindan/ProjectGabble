@@ -10,7 +10,7 @@ module.exports = {
         type:Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "tbl_users",
+          model: "tbl_user",
           key: "id"
         }
       }

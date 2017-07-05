@@ -1,13 +1,16 @@
 const routes = require('express').Router();
 const models = require('../models');
-
+//User sees this page first
 routes.get("/", function(req, res){
-  res.render("login", {sessionExist:req.session.username});
+  res.render("login", {sessionExist:req.session.userid});
 });
 
 routes.get("/login", function(req, res){
-  res.render("login", {sessionExist:req.session.username});
+  res.render("login", {sessionExist:req.session.id});
 });
+
+//Login to the system
+//checks invalid login
 
 routes.post('/login',function(req, res){
   let errors = "";
@@ -21,7 +24,9 @@ routes.post('/login',function(req, res){
     errors.forEach(function(error){
     messages.push(error.msg);
   });
-  res.render("login", {messages: messages, sessionExist:req.session.username});
+  res.render("login", {messages: messages,
+                       sessionExist:req.session.id,
+                       userFullName: req.session.name});
   }
   else {
     models.tbl_user.findOne({
@@ -36,10 +41,10 @@ routes.post('/login',function(req, res){
        else {
           req.session.username = user.username;
           req.session.userid = user.id;
+          req.session.name = user.name;
           res.redirect("/home");
        }
      });
    }
 });
-
 module.exports = routes;

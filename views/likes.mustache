@@ -10,7 +10,7 @@
     <div class="wrapper">
       <div class="header">
         {{#sessionExist}}
-          <span class="welcome">Welcome {{sessionExist}}</span>
+          <span class="welcome">Welcome {{userFullName}}</span>
         {{/sessionExist}}
         <span>
           <nav>
@@ -20,7 +20,7 @@
             {{/sessionExist}}
             {{#sessionExist}}
               <a href="/home">Gabble</a>
-              <a href="/home/logout">Log out</a>
+              <a href="/logout">Log out</a>
             {{/sessionExist}}
           </nav>
         </span>
@@ -31,12 +31,17 @@
       <div class="fields">
         <ul>
           {{#allMsg}}
-            <li>{{#gabs}}<b>{{username}}</b>{{/gabs}} : {{messages}}</li>
+            <li>{{#gabs}}<b>{{name}}</b>{{/gabs}} : {{messages}}</li>
             <li>{{createdAt}}</li>
           {{/allMsg}}
         </ul>
         <hr>
-        <!--<p>Liked by </p> -->
+        {{#getNumberOfLikes}}
+        <p>Liked by <b>{{getNumberOfLikes}}</b> users</p>
+        {{#likedUsersList}}
+          <p>{{#likeusers}}{{name}}{{/likeusers}}</p>
+        {{/likedUsersList}}
+        {{/getNumberOfLikes}}
       </div>
       {{/sessionExist}}
     </div>
