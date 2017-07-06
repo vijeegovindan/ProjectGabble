@@ -9,10 +9,10 @@ module.exports = {
       {
         type:Sequelize.INTEGER,
         allowNull: false,
-        references: {
+        /*references: {
           model: "tbl_user",
           key: "id"
-        }
+        }*/
       }
     )
 

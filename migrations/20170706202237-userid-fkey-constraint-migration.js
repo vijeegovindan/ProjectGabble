@@ -2,25 +2,23 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-
     queryInterface.addConstraint(
-      'tbl_likes',
-      ['messsage_id'],
+      'tbl_messages',
+      ['user_id'],
       {
         type: 'FOREIGN KEY',
-        name: 'message_id_fkey_constraint',
+        name: 'user_id_fkey_constraint',
         references:{
-          table: 'tbl_messages',
+          table: 'tbl_users',
           field: 'id'
         },
         onDelete: 'cascade',
         onUpdate: 'cascade'
       }
     );
-
   },
 
   down: function (queryInterface, Sequelize) {
-    queryInterface.removeConstraint('tbl_likes','message_id_fkey_constraint');
+    queryInterface.removeConstraint('tbl_messages','user_id_fkey_constraint');
   }
 };
